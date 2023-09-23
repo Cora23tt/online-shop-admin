@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#317EFB" />
+
+    <title>Admin page</title>
+
+    <link rel="manifest" href="./site.webmanifest">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module" src="/js/main.js"></script>
+
+    <style>
+        section {
+            display: none;
+        }
+
+        section:target {
+            display: block;
+        }
+
+        #loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-dark bg-dark sticky-top" id="navbar" style="display: none;">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#index">Dashboard</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar"
+                aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar"
+                aria-labelledby="offcanvasDarkNavbarLabel">
+
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" onclick="$('#close-nav-btn').click()">Dashboard</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
+                        aria-label="Close" id="close-nav-btn"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#products" id="open-products-page-btn"
+                                onclick="$('#close-nav-btn').click()">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#categories"
+                                onclick="$('#close-nav-btn').click()">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#consignments"
+                                onclick="$('#close-nav-btn').click()">Consignments</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#users" onclick="$('#close-nav-btn').click()">Users</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section id="index">
+        <div class="container mt-5">
+            <h2>Welcome to admin page!</h2>
+            <p>This is some text that you can write into the paragraph (p) tag.</p>
+        </div>
+    </section>
+
+    <section id="login">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h3 class="text-center mb-4">Login</h3>
+                            <form id="signin-form" class="mb-4">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Email" id="loginEmail"
+                                        required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="Password"
+                                        id="loginPassword" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            </form>
+                            <p>Не успели зарегистрироваться? <a href="#registration">Регистрация</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products">
+        <div class="container my-5">
+            
+            <button class="btn btn-primary mb-3" id="create-new-product-btn">Create new</button>
+
+            <div class="list-group" id="products-list-group">
+                <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">Product name</h5>
+                        <small><u>category</u></small>
+                    </div>
+                    <p class="mb-1">Product description</p>
+                    <small>Price: $10 | Aviable: 566 | Consignment: 16.03.2023</small>
+                </a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="editproduct">
+        <div class="container my-5">
+            <h2>Edit Product</h2>
+            <form id="editProductForm">
+                <div class="form-group">
+                    <label for="productNameEn">Name (English):</label>
+                    <input type="text" class="form-control" id="productNameEn" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescriptionEn">Description (English):</label>
+                    <textarea class="form-control" id="productDescriptionEn" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productNameRu">Name (Russian):</label>
+                    <input type="text" class="form-control" id="productNameRu" required>
+                </div>
+                <div class="form-group">
+                    <label for="productDescriptionRu">Description (Russian):</label>
+                    <textarea class="form-control" id="productDescriptionRu" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Category:</label>
+                    <select class="form-control" id="productCategory">
+                        <!-- Populate with categories from your data source -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Images:</label>
+                    <input type="file" id="productImages" multiple required>
+                    <div id="imagePreview" class="mt-2">
+                        <!-- Display image thumbnails here -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

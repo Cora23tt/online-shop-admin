@@ -1,0 +1,6 @@
+{
+    "apiUrl": "https://online-shop-client.onrender.com/",
+    "apiKey": "FbuiRuyF&8eF)09eUF89F",
+    "maxRequests": 10,
+    "retryDelay": 500
+}
